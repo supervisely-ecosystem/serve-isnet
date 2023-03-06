@@ -1,0 +1,9 @@
+[
+    {
+        "Model": "IS-Net",
+        "Size": "177 MB",
+        "Pretrained on": "DIS5K",
+        "F-measure": "0.726",
+        "HCE": "1016"
+    }
+]

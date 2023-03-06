@@ -1,0 +1,2 @@
+# indicates "half" or "full" accuracy of float number
+model_digit: "full"

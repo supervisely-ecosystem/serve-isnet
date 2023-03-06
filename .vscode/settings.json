@@ -1,0 +1,27 @@
+{
+    "python.defaultInterpreterPath": ".venv/bin/python",
+    "python.analysis.extraPaths": [
+        "/home/user/Coding/supervisely"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        ".venv": true
+    },
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "black-formatter.args": [
+        "--line-length",
+        "100"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "debug.inlineValues": "off",
+}
