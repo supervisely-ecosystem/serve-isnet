@@ -1,3 +1,4 @@
 supervisely
 gdown
 torch
+torchvision
