@@ -4,7 +4,6 @@ from torchvision import transforms
 import torch.nn.functional as F
 from src.data_loader_cache import normalize, im_reader, im_preprocess
 import numpy as np
-import supervisely as sly
 
 
 class GOSNormalize(object):
@@ -86,13 +85,3 @@ def predict(net, inputs_val, shapes_val, hypar, device):
     if device == "cuda":
         torch.cuda.empty_cache()
     return (pred_val.detach().cpu().numpy() * 255).astype(np.uint8)  # it is the mask we need
-
-
-# function for bounding boxes padding
-def bbox_padding(rectangle, padding=0):
-    left, right, top, bottom = rectangle.left, rectangle.right, rectangle.top, rectangle.bottom
-    pad_left = left - padding
-    pad_right = right + padding
-    pad_top = top - padding
-    pad_bottom = bottom + padding
-    return sly.Rectangle(pad_top, pad_left, pad_bottom, pad_right)
