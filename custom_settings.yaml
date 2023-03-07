@@ -1,2 +1,2 @@
-# indicates "half" or "full" accuracy of float number
-model_digit: "full"
+# bounding boxes padding for mask correction
+bbox_padding: 0

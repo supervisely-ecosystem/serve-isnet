@@ -16,7 +16,7 @@ import os
 import torch
 import gdown
 from src.isnet import ISNetDIS
-from src.infer_utils import load_image, build_model, predict
+from src.infer_utils import load_image, build_model, predict, bbox_padding
 from pathlib import Path
 
 
@@ -119,9 +119,11 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
         self, image_path: str, settings: Dict[str, Any]
     ) -> List[sly.nn.PredictionSegmentation]:
         image_tensor, orig_size = load_image(image_path, self.hypar)
-        model_digit = settings.get("model_digit")
-        if model_digit:
-            self.hypar["model_digit"] = model_digit
+        padding = settings.get("bbox_padding")
+        if padding and "rectangle" in settings:
+            rectangle = sly.Rectangle.from_json(settings["rectangle"])
+            padded_rectangle = bbox_padding(rectangle, padding)
+            settings["rectangle"] = padded_rectangle.to_json()
         mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
         mask = self.binarize_mask(mask)
         return [sly.nn.PredictionSegmentation(mask)]
