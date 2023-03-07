@@ -1,4 +1,4 @@
-supervisely
+git+https://github.com/supervisely/supervisely.git@object-segmentation-utils
 gdown
 torch
 torchvision
