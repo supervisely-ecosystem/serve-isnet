@@ -73,7 +73,7 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
 
     def _create_label(self, dto: PredictionSegmentation):
         geometry = sly.Bitmap(dto.mask)
-        obj_class = self.model_meta.get_obj_class("target")
+        obj_class = self.model_meta.get_obj_class(dto.class_name)
         if not dto.mask.any():  # skip empty masks
             logger.debug(f"Mask is empty and will be sklipped")
             return None
@@ -83,7 +83,9 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
     @property
     def model_meta(self):
         if self._model_meta is None:
-            self._model_meta = sly.ProjectMeta([sly.ObjClass("target", sly.Bitmap, [255, 0, 0])])
+            self._model_meta = sly.ProjectMeta(
+                [sly.ObjClass("object_mask", sly.Bitmap, [255, 0, 0])]
+            )
             self._get_confidence_tag_meta()
         return self._model_meta
 
@@ -101,7 +103,7 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
         # build model
         self.model = build_model(self.hypar, device)
         # define class names
-        self.class_names = ["target"]
+        self.class_names = ["object_mask"]
         print(f"✅ Model has been successfully loaded on {device.upper()} device")
 
     def get_info(self):
@@ -115,13 +117,23 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
     def get_classes(self) -> List[str]:
         return self.class_names
 
-    def predict(
-        self, image_path: str, settings: Dict[str, Any]
-    ) -> List[sly.nn.PredictionSegmentation]:
+    def predict(self, image_path: str, settings: Dict[str, Any]) -> List[sly.nn.PredictionMask]:
         image_tensor, orig_size = load_image(image_path, self.hypar)
         mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
         mask = self.binarize_mask(mask)
-        return [sly.nn.PredictionSegmentation(mask)]
+
+        if "rectangle" in settings:  # for ROI inference mode
+            rectangle_data = settings["rectangle"]
+            objclass_info = api.object_class.get_info_by_id(id=rectangle_data["classId"])
+            class_name = objclass_info.name + "_mask"
+            self.class_names.append(class_name)
+            # add new object class to model meta
+            self._model_meta = self._model_meta.add_obj_class(
+                sly.ObjClass(class_name, sly.Bitmap, [255, 0, 0])
+            )
+        else:
+            class_name = "object_mask"
+        return [sly.nn.PredictionMask(class_name=class_name, mask=mask)]
 
 
 m = ISNetModel(
