@@ -126,11 +126,12 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
             rectangle_data = settings["rectangle"]
             objclass_info = api.object_class.get_info_by_id(id=rectangle_data["classId"])
             class_name = objclass_info.name + "_mask"
-            self.class_names.append(class_name)
-            # add new object class to model meta
-            self._model_meta = self._model_meta.add_obj_class(
-                sly.ObjClass(class_name, sly.Bitmap, [255, 0, 0])
-            )
+            if class_name not in self.class_names:
+                self.class_names.append(class_name)
+                # add new object class to model meta
+                self._model_meta = self._model_meta.add_obj_class(
+                    sly.ObjClass(class_name, sly.Bitmap, [255, 0, 0])
+                )
         else:
             class_name = "object_mask"
         return [sly.nn.PredictionMask(class_name=class_name, mask=mask)]
