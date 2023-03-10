@@ -121,20 +121,7 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
         image_tensor, orig_size = load_image(image_path, self.hypar)
         mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
         mask = self.binarize_mask(mask)
-
-        if "rectangle" in settings:  # for ROI inference mode
-            rectangle_data = settings["rectangle"]
-            objclass_info = api.object_class.get_info_by_id(id=rectangle_data["classId"])
-            class_name = objclass_info.name + "_mask"
-            if class_name not in self.class_names:
-                self.class_names.append(class_name)
-                # add new object class to model meta
-                self._model_meta = self._model_meta.add_obj_class(
-                    sly.ObjClass(class_name, sly.Bitmap, [255, 0, 0])
-                )
-        else:
-            class_name = "object_mask"
-        return [sly.nn.PredictionMask(class_name=class_name, mask=mask)]
+        return [sly.nn.PredictionMask(class_name="object_mask", mask=mask)]
 
 
 m = ISNetModel(
