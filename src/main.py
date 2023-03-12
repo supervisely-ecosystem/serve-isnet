@@ -66,9 +66,11 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
         hypar["model"] = ISNetDIS()
         return hypar
 
-    def binarize_mask(self, mask):
-        mask[mask < 200] = 0
-        mask[mask >= 200] = 1
+    def binarize_mask(self, mask, threshold):
+        if threshold is None:
+            threshold = 200
+        mask[mask < threshold] = 0
+        mask[mask >= threshold] = 1
         return mask
 
     def _create_label(self, dto: PredictionSegmentation):
@@ -84,7 +86,7 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
     def model_meta(self):
         if self._model_meta is None:
             self._model_meta = sly.ProjectMeta(
-                [sly.ObjClass("object_mask", sly.Bitmap, [255, 0, 0])]
+                [sly.ObjClass(self.class_names[0], sly.Bitmap, [255, 0, 0])]
             )
             self._get_confidence_tag_meta()
         return self._model_meta
@@ -120,8 +122,9 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
     def predict(self, image_path: str, settings: Dict[str, Any]) -> List[sly.nn.PredictionMask]:
         image_tensor, orig_size = load_image(image_path, self.hypar)
         mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
-        mask = self.binarize_mask(mask)
-        return [sly.nn.PredictionMask(class_name="object_mask", mask=mask)]
+        threshold = settings.get("pixel_confidence_threshold")
+        mask = self.binarize_mask(mask, threshold)
+        return [sly.nn.PredictionMask(class_name=self.class_names[0], mask=mask)]
 
 
 m = ISNetModel(
