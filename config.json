@@ -18,7 +18,7 @@
     "deployed_nn_object_segmentation"
   ],
   "community_agent": false,
-  "docker_image": "supervisely/base-py-sdk:6.69.66",
+  "docker_image": "supervisely/base-py-sdk:6.69.78",
   "instance_version": "6.7.16",
   "entrypoint": "python -m uvicorn src.main:m.app --app-dir ./serve --host 0.0.0.0 --port 8000 --ws websockets",
   "port": 8000,
