@@ -24,7 +24,6 @@ load_dotenv("local.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 root_source_path = str(Path(__file__).parents[1])
 model_data_path = os.path.join(root_source_path, "model", "model_data.json")
-api = sly.Api()
 
 
 class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
