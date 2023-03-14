@@ -1,8 +1,5 @@
 {
     "python.defaultInterpreterPath": ".venv/bin/python",
-    "python.analysis.extraPaths": [
-        "/home/user/Coding/supervisely"
-    ],
     "files.exclude": {
         "**/__pycache__": true,
         ".venv": true
