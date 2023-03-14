@@ -1,2 +1,4 @@
-# bounding boxes padding for mask correction
-bbox_padding: 0
+# bounding boxes padding (in pixels) for mask correction
+bbox_padding: 100
+# threshold for regulating mask detalization (0 < int < 255)
+pixel_confidence_threshold: 200
