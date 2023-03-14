@@ -27,7 +27,7 @@ model_data_path = os.path.join(root_source_path, "model", "model_data.json")
 api = sly.Api()
 
 
-class ISNetModel(sly.nn.inference.SemanticSegmentation):
+class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
     def get_models(self):
         model_data = sly.json.load_json_file(model_data_path)
         return model_data
@@ -73,15 +73,6 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
         mask[mask >= threshold] = 1
         return mask
 
-    def _create_label(self, dto: PredictionSegmentation):
-        geometry = sly.Bitmap(dto.mask)
-        obj_class = self.model_meta.get_obj_class(dto.class_name)
-        if not dto.mask.any():  # skip empty masks
-            logger.debug(f"Mask is empty and will be sklipped")
-            return None
-        label = sly.Label(geometry, obj_class)
-        return [label]
-
     @property
     def model_meta(self):
         if self._model_meta is None:
@@ -110,10 +101,8 @@ class ISNetModel(sly.nn.inference.SemanticSegmentation):
 
     def get_info(self):
         info = super().get_info()
-        info["task type"] = "salient object segmentation"
         info["videos_support"] = False
         info["async_video_inference_support"] = False
-        info["tracking_on_videos_support"] = False
         return info
 
     def get_classes(self) -> List[str]:
