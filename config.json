@@ -15,7 +15,7 @@
   "poster": "some url",
   "need_gpu": true,
   "session_tags": [
-    "deployed_nn_object_segmentation"
+    "deployed_nn"
   ],
   "community_agent": false,
   "docker_image": "supervisely/is-net:1.0.0",
