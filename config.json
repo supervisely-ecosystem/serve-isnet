@@ -10,11 +10,9 @@
     "serve",
     "development"
   ],
-  "icon": "some url",
-  "icon_cover": true,
-  "poster": "some url",
   "need_gpu": true,
   "session_tags": [
+    "deployed_nn",
     "deployed_nn_object_segmentation"
   ],
   "community_agent": false,
