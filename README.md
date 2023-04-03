@@ -58,8 +58,7 @@ https://user-images.githubusercontent.com/115161827/228303154-0e484ab8-7e98-4ded
 You can use served model in next Supervisely Applications ⬇️
 
 - [Apply Object Segmentor to Images Project](https://ecosystem.supervise.ly/apps/apply-object-segmentor-to-images-project) - app allows to label images project using served  detection and pose estimation models.
-   
-    <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/apply-object-segmentor-to-images-project" src="https://user-images.githubusercontent.com/119248312/229166923-a31d3496-ead6-4eaf-a36e-4e3254b52cc0.jpg" height="70px" margin-bottom="20px"/>
+    <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/apply-object-segmentor-to-images-project" src="https://user-images.githubusercontent.com/115161827/229510088-dfe8413f-ec09-4cca-988e-596aab4dd7d2.jpg" height="70px" margin-bottom="20px"/>
     
 - [NN Image Labeling](https://ecosystem.supervise.ly/apps/supervisely-ecosystem%252Fnn-image-labeling%252Fannotation-tool) - integrate any deployed NN to Supervisely Image Labeling UI. Configure inference settings and model output classes. Press `Apply` button (or use hotkey) and detections with their confidences will immediately appear on the image.   
     <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/nn-image-labeling/annotation-tool" src="https://i.imgur.com/hYEucNt.png" height="70px" margin-bottom="20px"/>
