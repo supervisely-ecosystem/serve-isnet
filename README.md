@@ -41,7 +41,7 @@ Models under a Salient Instance Segmentation task are usually used for separatin
 
 Copy model file path from Team Files:
 
-vid link
+https://user-images.githubusercontent.com/91027877/229389158-73a2653e-a8ff-4ab7-803c-5b0fe55cefe3.MP4
 
 # Example: apply IS-Net to image/ROI in labeling tool
 
