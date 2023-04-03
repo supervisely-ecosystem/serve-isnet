@@ -49,8 +49,6 @@ Run **NN Image Labeling** app, connect to IS-Net, and click on "Apply model to i
 
 https://user-images.githubusercontent.com/115161827/228263450-f4a4ee6a-b0d3-465d-a1e8-7c872f41ca39.mp4
 
-# Example: custom inference settings
-
 If you want to change model specific inference settings while working with the model in image labeling interface, go to **inference** tab in the settings section of **Apps** window, and change the parameters to your liking:
 
 https://user-images.githubusercontent.com/115161827/228303154-0e484ab8-7e98-4ded-8e56-3f31e91631e2.mp4
