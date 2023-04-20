@@ -24,6 +24,7 @@ load_dotenv("local.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 root_source_path = str(Path(__file__).parents[1])
 model_data_path = os.path.join(root_source_path, "model", "model_data.json")
+weights_location_path = "/weights"
 
 
 class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
@@ -33,7 +34,9 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
 
     def download_weights(self, model_dir):
         model_source = self.gui.get_model_source()
-        weights_dst_path = os.path.join(model_dir, "weights.pth")
+        weights_dst_path = os.path.join(weights_location_path, "isnet.pth")
+        # for debug
+        # weights_dst_path = os.path.join(model_dir, "isnet.pth")
         if model_source == "Pretrained models":
             if not sly.fs.file_exists(weights_dst_path):
                 weights_url = "https://drive.google.com/uc?id=1KyMpRjewZdyYfxHPYcd-ZbanIXtin0Sn"
@@ -49,7 +52,7 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
     def prepare_hyperparameters(self, model_dir):
         hypar = {}
         hypar["model_path"] = model_dir  # load trained weights from this path
-        hypar["restore_model"] = "weights.pth"  # name of the to-be-loaded weights
+        hypar["restore_model"] = "isnet.pth"  # name of the to-be-loaded weights
         hypar["interm_sup"] = False  # indicate if activate intermediate feature supervision
         hypar["model_digit"] = "full"  # indicates "half" or "full" accuracy of float number
         hypar["seed"] = 0

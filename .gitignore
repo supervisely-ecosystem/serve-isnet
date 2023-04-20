@@ -2,5 +2,5 @@ local.env
 src/without_ui.py
 src/__pycache__
 src/test.py
-results/models/weights.pth
+results/models/isnet.pth
 src/old.py
