@@ -41,15 +41,13 @@ Models under a Salient Instance Segmentation task are usually used for separatin
 
 Copy model file path from Team Files:
 
-vid link
+https://user-images.githubusercontent.com/91027877/230080478-197327e3-bf9e-4efa-8e55-7202709a5d09.mp4
 
 # Example: apply IS-Net to image/ROI in labeling tool
 
 Run **NN Image Labeling** app, connect to IS-Net, and click on "Apply model to image", or if you want to apply IS-Net only to the region within the bounding box, select the bbox and click on "Apply model to ROI":
 
 https://user-images.githubusercontent.com/115161827/228263450-f4a4ee6a-b0d3-465d-a1e8-7c872f41ca39.mp4
-
-# Example: custom inference settings
 
 If you want to change model specific inference settings while working with the model in image labeling interface, go to **inference** tab in the settings section of **Apps** window, and change the parameters to your liking:
 
@@ -60,8 +58,11 @@ https://user-images.githubusercontent.com/115161827/228303154-0e484ab8-7e98-4ded
 You can use served model in next Supervisely Applications ⬇️
 
 - [Apply Object Segmentor to Images Project](https://ecosystem.supervise.ly/apps/apply-object-segmentor-to-images-project) - app allows to label images project using served  detection and pose estimation models.
-   
-    <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/apply-object-segmentor-to-images-project" src=icon width="650px"/>
+
+    <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/apply-object-segmentor-to-images-project" src="https://user-images.githubusercontent.com/115161827/229510088-dfe8413f-ec09-4cca-988e-596aab4dd7d2.jpg" height="70px" margin-bottom="20px"/>
+    
+- [NN Image Labeling](https://ecosystem.supervise.ly/apps/supervisely-ecosystem%252Fnn-image-labeling%252Fannotation-tool) - integrate any deployed NN to Supervisely Image Labeling UI. Configure inference settings and model output classes. Press `Apply` button (or use hotkey) and detections with their confidences will immediately appear on the image.   
+    <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/nn-image-labeling/annotation-tool" src="https://i.imgur.com/hYEucNt.png" height="70px" margin-bottom="20px"/>
     
 # Acknowledgment
 
