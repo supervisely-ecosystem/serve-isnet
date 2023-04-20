@@ -51,7 +51,9 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
 
     def prepare_hyperparameters(self, model_dir):
         hypar = {}
-        hypar["model_path"] = model_dir  # load trained weights from this path
+        # for debug
+        # hypar["model_path"] = model_dir  # load trained weights from this path
+        hypar["model_path"] = weights_location_path  # load trained weights from this path
         hypar["restore_model"] = "isnet.pth"  # name of the to-be-loaded weights
         hypar["interm_sup"] = False  # indicate if activate intermediate feature supervision
         hypar["model_digit"] = "full"  # indicates "half" or "full" accuracy of float number
