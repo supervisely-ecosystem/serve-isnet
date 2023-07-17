@@ -10,7 +10,8 @@
     "serve",
     "development"
   ],
-  "need_gpu": true,
+  "need_gpu": false,
+  "gpu": "preferred",
   "session_tags": [
     "deployed_nn",
     "deployed_nn_object_segmentation"
