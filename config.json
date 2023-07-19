@@ -7,8 +7,7 @@
     "neural network",
     "images",
     "salient object segmentation",
-    "serve",
-    "development"
+    "serve"
   ],
   "need_gpu": false,
   "gpu": "preferred",
