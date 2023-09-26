@@ -5,7 +5,7 @@ RUN apt-get update
 RUN pip3 install torch torchvision --extra-index-url https://download.pytorch.org/whl/cu116
 RUN pip3 install gdown
 
-RUN python3 -m pip install supervisely==6.69.78
+RUN python3 -m pip install supervisely==6.72.136
 
 RUN mkdir -p weights
 COPY isnet.pth /weights/
