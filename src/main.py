@@ -157,8 +157,14 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
             sly_image.write(image_path, image_crop_np)
             image_tensor, orig_size = load_image(image_path, self.hypar)
             mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
+            encoded_mask = sly.Bitmap.data_2_base64(mask)
+            origin = {
+                "x": crop[0]["x"],
+                "y": crop[0]["y"],
+            }
             response = {
-                "bitmap": mask.tolist(),
+                "data": encoded_mask,
+                "origin": origin,
                 "success": True,
                 "error": None,
             }
