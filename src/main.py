@@ -1,6 +1,10 @@
 import supervisely as sly
 from supervisely.nn.prediction_dto import PredictionSegmentation
 from supervisely.sly_logger import logger
+from supervisely.nn.inference.interactive_segmentation import functional
+from supervisely.app.content import get_data_dir
+from supervisely.imaging import image as sly_image
+from supervisely._utils import rand_str
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -18,6 +22,8 @@ import gdown
 from src.isnet import ISNetDIS
 from src.infer_utils import load_image, build_model, predict
 from pathlib import Path
+from fastapi import Response, Request, status
+import time
 
 
 load_dotenv("local.env")
@@ -118,6 +124,45 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
         threshold = settings.get("pixel_confidence_threshold")
         mask = self.binarize_mask(mask, threshold)
         return [sly.nn.PredictionMask(class_name=self.class_names[0], mask=mask)]
+
+    def serve(self):
+        super().serve()
+        server = self._app.get_server()
+
+        @server.post("/smart_segmentation")
+        def smart_segmentation(response: Response, request: Request):
+            try:
+                state = request.state.state
+                smtool_state = request.state.context
+                api = request.state.api
+                crop = smtool_state["crop"]
+            except Exception as exc:
+                logger.warn("Error parsing request:" + str(exc), exc_info=True)
+                response.status_code = status.HTTP_400_BAD_REQUEST
+                return {"message": "400: Bad request.", "success": False}
+
+            app_dir = get_data_dir()
+
+            image_np = api.image.download_np(smtool_state["image_id"])
+
+            top, left, bottom, right = [
+                crop[0]["y"],
+                crop[0]["x"],
+                crop[1]["y"],
+                crop[1]["x"],
+            ]
+            rectangle = sly.Rectangle(top, left, bottom, right)
+            image_crop_np = sly_image.crop(image_np, rectangle)
+            image_path = os.path.join(app_dir, f"{time.time()}_{rand_str(10)}.jpg")
+            sly_image.write(image_path, image_crop_np)
+            image_tensor, orig_size = load_image(image_path, self.hypar)
+            mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
+            response = {
+                "bitmap": mask.tolist(),
+                "success": True,
+                "error": None,
+            }
+            return response
 
 
 m = ISNetModel(

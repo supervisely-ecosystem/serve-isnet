@@ -4,3 +4,5 @@ src/__pycache__
 src/test.py
 results/models/isnet.pth
 src/old.py
+results/
+weights/
