@@ -26,6 +26,7 @@ from fastapi import Response, Request, status
 import time
 import base64
 import numpy as np
+from PIL import Image
 
 
 load_dotenv("local.env")
@@ -134,7 +135,6 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
         @server.post("/smart_segmentation")
         def smart_segmentation(response: Response, request: Request):
             try:
-                state = request.state.state
                 smtool_state = request.state.context
                 api = request.state.api
                 crop = smtool_state["crop"]
@@ -159,14 +159,16 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
             sly_image.write(image_path, image_crop_np)
             image_tensor, orig_size = load_image(image_path, self.hypar)
             mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
-            encoded_mask = base64.b64encode(mask)
-            # decoded_mask = np.frombuffer(base64.decodebytes(encoded_mask), dtype=np.uint8)
+            im = Image.fromarray(mask)
+            im.save("mask.png")
+            with open("mask.png", "rb") as image_file:
+                encoded_string = base64.b64encode(image_file.read())
             origin = {
                 "x": crop[0]["x"],
                 "y": crop[0]["y"],
             }
             response = {
-                "data": encoded_mask,
+                "data": encoded_string,
                 "origin": origin,
                 "success": True,
                 "error": None,
