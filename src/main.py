@@ -24,6 +24,8 @@ from src.infer_utils import load_image, build_model, predict
 from pathlib import Path
 from fastapi import Response, Request, status
 import time
+import base64
+import numpy as np
 
 
 load_dotenv("local.env")
@@ -157,7 +159,8 @@ class ISNetModel(sly.nn.inference.SalientObjectSegmentation):
             sly_image.write(image_path, image_crop_np)
             image_tensor, orig_size = load_image(image_path, self.hypar)
             mask = predict(self.model, image_tensor, orig_size, self.hypar, self.device)
-            encoded_mask = sly.Bitmap.data_2_base64(mask)
+            encoded_mask = base64.b64encode(mask)
+            # decoded_mask = np.frombuffer(base64.decodebytes(encoded_mask), dtype=np.uint8)
             origin = {
                 "x": crop[0]["x"],
                 "y": crop[0]["y"],
