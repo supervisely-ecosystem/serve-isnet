@@ -12,7 +12,7 @@
   <a href="#Acknowledgment">Acknowledgment</a>
 </p>
 
-[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervisely.com/apps/supervisely-ecosystem/serve-isnet)
+[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](../../../../supervisely-ecosystem/serve-isnet)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervisely.com/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/serve-isnet)
 [![views](https://app.supervisely.com/img/badges/views/supervisely-ecosystem/serve-isnet.png)](https://supervisely.com)
@@ -57,11 +57,11 @@ https://user-images.githubusercontent.com/115161827/228303154-0e484ab8-7e98-4ded
 
 You can use served model in next Supervisely Applications ⬇️
 
-- [Apply Object Segmentor to Images Project](https://ecosystem.supervisely.com/apps/apply-object-segmentor-to-images-project) - app allows to label images project using served  detection and pose estimation models.
+- [Apply Object Segmentor to Images Project](../../../../supervisely-ecosystem/apply-object-segmentor-to-images-project) - app allows to label images project using served  detection and pose estimation models.
 
     <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/apply-object-segmentor-to-images-project" src="https://user-images.githubusercontent.com/115161827/229510088-dfe8413f-ec09-4cca-988e-596aab4dd7d2.jpg" height="70px" margin-bottom="20px"/>
     
-- [NN Image Labeling](https://ecosystem.supervisely.com/apps/supervisely-ecosystem%252Fnn-image-labeling%252Fannotation-tool) - integrate any deployed NN to Supervisely Image Labeling UI. Configure inference settings and model output classes. Press `Apply` button (or use hotkey) and detections with their confidences will immediately appear on the image.   
+- [NN Image Labeling](../../../../supervisely-ecosystem/supervisely-ecosystem%252Fnn-image-labeling%252Fannotation-tool) - integrate any deployed NN to Supervisely Image Labeling UI. Configure inference settings and model output classes. Press `Apply` button (or use hotkey) and detections with their confidences will immediately appear on the image.   
     <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/nn-image-labeling/annotation-tool" src="https://i.imgur.com/hYEucNt.png" height="70px" margin-bottom="20px"/>
     
 # Acknowledgment
