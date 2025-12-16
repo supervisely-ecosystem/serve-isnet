@@ -1,30 +1,30 @@
 {
-  "name": "Serve IS-Net",
-  "type": "app",
-  "version": "2.0.0",
-  "description": "Deploy model as REST API service",
-  "categories": [
-    "neural network",
-    "images",
-    "salient object segmentation",
-    "serve"
-  ],
-  "need_gpu": false,
-  "gpu": "preferred",
-  "session_tags": [
-    "deployed_nn",
-    "deployed_nn_object_segmentation"
-  ],
-  "community_agent": false,
-  "docker_image": "supervisely/is-net:1.0.1",
-  "instance_version": "6.7.16",
-  "entrypoint": "python -m uvicorn src.main:m.app --app-dir ./serve --host 0.0.0.0 --port 8000 --ws websockets",
-  "port": 8000,
-  "task_location": "application_sessions",
-  "icon": "https://user-images.githubusercontent.com/115161827/227242070-fff3a734-af6c-447e-9cf1-fac86643291f.jpg",
-  "icon_cover": true,
-  "poster": "https://user-images.githubusercontent.com/115161827/227242096-4d4d9481-d6f9-4032-8977-63901361fa19.jpg",
-  "license": {
-    "type": "Apache-2.0" 
-  }
+    "name": "Serve IS-Net",
+    "type": "app",
+    "version": "2.0.0",
+    "description": "Deploy model as REST API service",
+    "categories": [
+        "neural network",
+        "images",
+        "salient object segmentation",
+        "serve"
+    ],
+    "need_gpu": false,
+    "gpu": "preferred",
+    "session_tags": [
+        "deployed_nn",
+        "deployed_nn_object_segmentation"
+    ],
+    "community_agent": false,
+    "docker_image": "supervisely/is-net:1.0.2",
+    "instance_version": "6.15.35",
+    "entrypoint": "python -m uvicorn src.main:m.app --app-dir ./serve --host 0.0.0.0 --port 8000 --ws websockets",
+    "port": 8000,
+    "task_location": "application_sessions",
+    "icon": "https://user-images.githubusercontent.com/115161827/227242070-fff3a734-af6c-447e-9cf1-fac86643291f.jpg",
+    "icon_cover": true,
+    "poster": "https://user-images.githubusercontent.com/115161827/227242096-4d4d9481-d6f9-4032-8977-63901361fa19.jpg",
+    "license": {
+        "type": "Apache-2.0"
+    }
 }
